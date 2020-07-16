@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BibleService } from '../bible.service';
 
 let log = true;
@@ -18,9 +18,10 @@ export class VerseComponent implements OnInit {
   books;
   verses = [];
   chapters = [];
+  verse;
 
   constructor(private bible: BibleService) {
-    if (log) console.log(VerseComponent.name+'.ctor', {bible});
+    if (log) console.log(VerseComponent.name + '.ctor', { bible });
     this.books = bible.getBooks();
   }
 
@@ -35,13 +36,18 @@ export class VerseComponent implements OnInit {
   }
 
   update() {
-    let controls = this.form.controls;
-    this.chapters = this.bible.getChapters(controls.selectedBook.value);
-    this.verses = this.bible.getVerses(controls.selectedBook.value, controls.selectedChapter.value || '1');
-    if (log) console.log(VerseComponent.name+'.'+this.update.name, {
-      val: controls,
-      'this.chapters':this.chapters,
-      'this.verses':this.verses,
+    let c = this.form.controls;
+    this.chapters = this.bible.getChapters(c.selectedBook.value);
+    this.verses = this.bible.getVerses(c.selectedBook.value, c.selectedChapter.value);
+    if (log) console.log(VerseComponent.name + '.' + this.update.name, {
+      val: c,
+      'this.chapters': this.chapters,
+      'this.verses': this.verses,
     });
+    this.verse = this.bible
+      .getVerse(
+        c.selectedBook.value,
+        c.selectedChapter.value,
+        c.selectedVerse.value);
   }
 }

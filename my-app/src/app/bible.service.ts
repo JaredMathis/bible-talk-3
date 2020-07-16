@@ -21,34 +21,53 @@ export class BibleService {
   getBook(bookName): any {
     console.log(this.getBook.name, {bookName});
     let book;
+
     if (bookName === 'Genesis') {
       book = Genesis;
+
     } else if (bookName === 'Exodus') {
       book = Exodus;
+
     } else if (bookName === 'John') {
       book = John;
+
     } else {
       throw new Error('not implemented');
     }
+    
     return book;
   }
 
-  getVerses(bookName, chapter) {
+  getChapter(bookName, chapter) {
     let book = this
       .getBook(bookName);
-    let verses = book
+    let result = book
       .chapters
       .filter(c => c.chapter === chapter)[0];
+    return result;
+  }
+
+  getVerses(bookName, chapterNumber) {
+    let chapter = this.getChapter(bookName, chapterNumber);
     console.log(BibleService.name + '.' + this.getVerses.name, {
       bookName,
+      chapterNumber,
       chapter,
-      verses,
-      book,
     });
-    return verses.verses.map(v => v.verse);
+    return chapter.verses.map(v => v.verse);
   }
 
   getChapters(bookName) {
     return this.getBook(bookName).chapters.map(c => c.chapter);
+  }
+
+  getVerse(bookName, chapterNumber, verseNumber) {
+    if (log) console.log(this.getVerse.name, { bookName, chapterNumber, verseNumber});
+    let chapter = this.getChapter(bookName, chapterNumber)
+    let verse = chapter.verses
+      .filter(v => v.verse === verseNumber)[0];
+    let result = verse.text;
+    if (log) console.log(this.getVerse.name, { chapter, verse, result});
+    return result;
   }
 }
