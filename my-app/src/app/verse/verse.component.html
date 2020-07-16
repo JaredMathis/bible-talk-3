@@ -1,1 +1,10 @@
-{{ books | json }}
+<div class="container">
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label for="selectedBook">Book:</label>
+            <select formControlName="selectedBook" class="form-control">
+                <option *ngFor="let book of books">{{book}}</option>
+            </select>
+        </div>
+    </form>
+</div>

@@ -11,7 +11,7 @@ let log = false;
 })
 export class VerseComponent implements OnInit {
   form = new FormGroup({
-    website: new FormControl('', Validators.required)
+    selectedBook: new FormControl('')
   });
   books;
 
@@ -22,5 +22,4 @@ export class VerseComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
