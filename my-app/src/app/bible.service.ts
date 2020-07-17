@@ -62,7 +62,7 @@ export class BibleService {
   }
 
   getVerse(bookName, chapterNumber, verseNumber) {
-    if (log) console.log(this.getVerse.name, { bookName, chapterNumber, verseNumber});
+    if (log) console.log(this.getVerse.name, { bookName, chapterNumber, verseNumber });
     let chapter = this.getChapter(bookName, chapterNumber)
     let verse = chapter.verses
       .filter(v => v.verse === verseNumber)[0];

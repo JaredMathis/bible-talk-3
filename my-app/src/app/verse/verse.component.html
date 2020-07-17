@@ -1,19 +1,24 @@
 <div class="container">
-    <form [formGroup]="form">
-        <div class="form-group">
-            <label for="selectedBook">Book:</label>
-            <select formControlName="selectedBook" class="form-control">
-                <option *ngFor="let book of books">{{book}}</option>
-            </select>
-            <label for="selectedChapter">Chapter:</label>
-            <select formControlName="selectedChapter" class="form-control">
-                <option *ngFor="let chapter of chapters">{{chapter}}</option>
-            </select>
-            <label for="selectedVerse">Verse:</label>
-            <select formControlName="selectedVerse" class="form-control">
-                <option *ngFor="let verse of verses">{{verse}}</option>
-            </select>
-        </div>
-    </form>
+    <mat-form-field>
+        <mat-select placeholder="Book" [(ngModel)]="selectedBook" (ngModelChange)="bookChanged($event)">
+        <mat-option *ngFor="let book of books" [value]="book">
+            {{book}}
+        </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="Chapter" [(ngModel)]="selectedChapter">
+        <mat-option *ngFor="let chapter of chapters" [value]="chapter">
+            {{chapter}}
+        </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="Verse" [(ngModel)]="selectedVerse">
+        <mat-option *ngFor="let verse of verses" [value]="verse">
+            {{verse}}
+        </mat-option>
+        </mat-select>
+    </mat-form-field>
 </div>
 {{ verse }}

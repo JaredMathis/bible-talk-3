@@ -15,6 +15,9 @@ export class VerseComponent implements OnInit {
     selectedChapter: new FormControl(''),
     selectedVerse: new FormControl(''),
   });
+  selectedBook;
+  selectedChapter;
+  selectedVerse;
   books;
   verses = [];
   chapters = [];
@@ -25,29 +28,21 @@ export class VerseComponent implements OnInit {
     this.books = bible.getBooks();
   }
 
-  ngOnInit(): void {
-    this.form.controls.selectedBook.setValue('Genesis');
-    this.form.controls.selectedChapter.setValue('1');
-    this.form.controls.selectedVerse.setValue('1');
-    this.update();
-    this.form.valueChanges.subscribe(val => {
-      this.update();
-    });
-  }
-
-  update() {
-    let c = this.form.controls;
-    this.chapters = this.bible.getChapters(c.selectedBook.value);
-    this.verses = this.bible.getVerses(c.selectedBook.value, c.selectedChapter.value);
-    if (log) console.log(VerseComponent.name + '.' + this.update.name, {
-      val: c,
-      'this.chapters': this.chapters,
-      'this.verses': this.verses,
-    });
+  bookChanged($event) {
+    this.chapters = this.bible.getChapters(this.selectedBook);
+    this.selectedChapter = '1';
+    this.verses = this.bible.getVerses(this.selectedBook, this.selectedChapter);
+    this.selectedChapter = '1';
+    this.selectedVerse = '1';
     this.verse = this.bible
       .getVerse(
-        c.selectedBook.value,
-        c.selectedChapter.value,
-        c.selectedVerse.value);
+        this.selectedBook,
+        this.selectedChapter,
+        this.selectedVerse);
+  }
+
+  ngOnInit(): void {
+    this.selectedBook = 'John';
+    this.bookChanged('');
   }
 }
