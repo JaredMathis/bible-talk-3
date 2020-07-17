@@ -10,11 +10,6 @@ let log = true;
   styleUrls: ['./verse.component.css']
 })
 export class VerseComponent implements OnInit {
-  form = new FormGroup({
-    selectedBook: new FormControl(''),
-    selectedChapter: new FormControl(''),
-    selectedVerse: new FormControl(''),
-  });
   selectedBook;
   selectedChapter;
   selectedVerse;
@@ -28,12 +23,19 @@ export class VerseComponent implements OnInit {
     this.books = bible.getBooks();
   }
 
-  bookChanged($event) {
+  bookChanged() {
     this.chapters = this.bible.getChapters(this.selectedBook);
     this.selectedChapter = '1';
+    this.chapterChanged();
+  }
+
+  chapterChanged() {
     this.verses = this.bible.getVerses(this.selectedBook, this.selectedChapter);
-    this.selectedChapter = '1';
     this.selectedVerse = '1';
+    this.verseChanged();
+  }
+
+  verseChanged() {
     this.verse = this.bible
       .getVerse(
         this.selectedBook,
@@ -43,6 +45,6 @@ export class VerseComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedBook = 'John';
-    this.bookChanged('');
+    this.bookChanged();
   }
 }
