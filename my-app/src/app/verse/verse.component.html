@@ -1,23 +1,23 @@
 <div class="container">
     <mat-form-field>
-        <mat-select placeholder="Book" [(ngModel)]="selectedBook" (ngModelChange)="bookChanged($event)">
-        <mat-option *ngFor="let book of books" [value]="book">
-            {{book}}
-        </mat-option>
+        <mat-select placeholder="Book" [(ngModel)]="selectedBook" (ngModelChange)="bookChanged()">
+            <mat-option *ngFor="let book of books" [value]="book">
+                {{book}}
+            </mat-option>
         </mat-select>
     </mat-form-field>
     <mat-form-field>
-        <mat-select placeholder="Chapter" [(ngModel)]="selectedChapter">
-        <mat-option *ngFor="let chapter of chapters" [value]="chapter">
-            {{chapter}}
-        </mat-option>
+        <mat-select placeholder="Chapter" [(ngModel)]="selectedChapter" (ngModelChange)="chapterChanged()">
+            <mat-option *ngFor="let chapter of chapters" [value]="chapter">
+                {{chapter}}
+            </mat-option>
         </mat-select>
     </mat-form-field>
     <mat-form-field>
-        <mat-select placeholder="Verse" [(ngModel)]="selectedVerse">
-        <mat-option *ngFor="let verse of verses" [value]="verse">
-            {{verse}}
-        </mat-option>
+        <mat-select placeholder="Verse" [(ngModel)]="selectedVerse" (ngModelChange)="verseChanged()">
+            <mat-option *ngFor="let verse of verses" [value]="verse">
+                {{verse}}
+            </mat-option>
         </mat-select>
     </mat-form-field>
 </div>
