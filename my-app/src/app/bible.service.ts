@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import books from '../assets/kjv/Books.json';
-import Genesis from '../assets/kjv/Genesis.json';
-import Exodus from '../assets/kjv/Exodus.json';
-import John from '../assets/kjv/John.json';
+import books from '../assets/Books.json';
+import bible from '../assets/kjv/Bible.json';
 
 let log = true;
 
@@ -20,18 +18,8 @@ export class BibleService {
 
   getBook(bookName): any {
     console.log(this.getBook.name, {bookName});
-    let book;
-
-    if (bookName === 'Genesis') {
-      book = Genesis;
-
-    } else if (bookName === 'Exodus') {
-      book = Exodus;
-
-    } else if (bookName === 'John') {
-      book = John;
-
-    } else {
+    let book = bible.filter(b => b.book === bookName)[0];
+    if (!book) {
       throw new Error('not implemented');
     }
     

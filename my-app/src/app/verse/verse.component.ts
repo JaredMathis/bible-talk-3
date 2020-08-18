@@ -21,6 +21,7 @@ export class VerseComponent implements OnInit {
   constructor(private bible: BibleService) {
     if (log) console.log(VerseComponent.name + '.ctor', { bible });
     this.books = bible.getBooks();
+    console.log({firebase});
   }
 
   bookChanged() {
